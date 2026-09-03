@@ -1,0 +1,21 @@
+<div class="product-detail">
+  <button type="button" (click)="backToDashboard()">&larr; Back</button>
+
+  <p *ngIf="loading">Loading...</p>
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <div *ngIf="product">
+    <h1>{{ product.name }}</h1>
+    <p>{{ product.description }}</p>
+    <dl>
+      <dt>Price</dt>
+      <dd>{{ product.price | number: '1.2-2' }}</dd>
+      <dt>Quantity</dt>
+      <dd>{{ product.quantity }}</dd>
+    </dl>
+    <div class="actions">
+      <button type="button" (click)="editProduct()">Edit</button>
+      <button type="button" (click)="deleteProduct()">Delete</button>
+    </div>
+  </div>
+</div>

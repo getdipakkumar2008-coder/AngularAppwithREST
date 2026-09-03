@@ -1,0 +1,32 @@
+<div class="dashboard">
+  <div class="dashboard-header">
+    <h1>Products</h1>
+    <button type="button" (click)="goToCreate()">Add Product</button>
+  </div>
+
+  <p *ngIf="loading">Loading products...</p>
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <p *ngIf="!loading && !error && products.length === 0">No products found. Add one to get started.</p>
+
+  <table *ngIf="!loading && products.length > 0">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td (click)="viewProduct(product)" class="clickable">{{ product.name }}</td>
+        <td (click)="viewProduct(product)" class="clickable">{{ product.price | number: '1.2-2' }}</td>
+        <td (click)="viewProduct(product)" class="clickable">{{ product.quantity }}</td>
+        <td>
+          <button type="button" (click)="onDeleteClick(product)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

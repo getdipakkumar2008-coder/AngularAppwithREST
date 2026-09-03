@@ -1,0 +1,9 @@
+CREATE TABLE product (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description VARCHAR(1000),
+    price NUMERIC(12, 2) NOT NULL,
+    quantity INTEGER NOT NULL,
+    created_date TIMESTAMPTZ NOT NULL,
+    updated_date TIMESTAMPTZ NOT NULL
+);
