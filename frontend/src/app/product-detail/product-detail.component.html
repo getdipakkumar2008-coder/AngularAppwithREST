@@ -1,21 +1,36 @@
-<div class="product-detail">
-  <button type="button" (click)="backToDashboard()">&larr; Back</button>
+<div class="page">
+  <button type="button" class="btn-back" (click)="backToDashboard()">&larr; Back to dashboard</button>
 
-  <p *ngIf="loading">Loading...</p>
-  <p class="error" *ngIf="error">{{ error }}</p>
+  <p class="state loading" *ngIf="loading"><span class="spinner"></span> Loading...</p>
+  <p class="state error" *ngIf="error">⚠ {{ error }}</p>
 
-  <div *ngIf="product">
-    <h1>{{ product.name }}</h1>
-    <p>{{ product.description }}</p>
-    <dl>
-      <dt>Price</dt>
-      <dd>{{ product.price | number: '1.2-2' }}</dd>
-      <dt>Quantity</dt>
-      <dd>{{ product.quantity }}</dd>
-    </dl>
+  <div class="detail-card" *ngIf="product">
+    <div class="detail-header">
+      <h1>{{ product.name }}</h1>
+      <span class="badge"
+            [class.badge-danger]="product.quantity < 20"
+            [class.badge-warning]="product.quantity >= 20 && product.quantity < 100"
+            [class.badge-success]="product.quantity >= 100">
+        {{ product.quantity }} in stock
+      </span>
+    </div>
+
+    <p class="description">{{ product.description || 'No description provided.' }}</p>
+
+    <div class="stat-row">
+      <div class="stat">
+        <span class="stat-label">Price</span>
+        <span class="stat-value price">{{ product.price | number: '1.2-2' }}</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Quantity</span>
+        <span class="stat-value">{{ product.quantity }}</span>
+      </div>
+    </div>
+
     <div class="actions">
-      <button type="button" (click)="editProduct()">Edit</button>
-      <button type="button" (click)="deleteProduct()">Delete</button>
+      <button type="button" class="btn btn-primary" (click)="editProduct()">Edit</button>
+      <button type="button" class="btn btn-danger" (click)="deleteProduct()">Delete</button>
     </div>
   </div>
 </div>
