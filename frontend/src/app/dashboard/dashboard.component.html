@@ -1,32 +1,47 @@
-<div class="dashboard">
-  <div class="dashboard-header">
-    <h1>Products</h1>
-    <button type="button" (click)="goToCreate()">Add Product</button>
+<div class="page">
+  <div class="hero">
+    <div class="hero-text">
+      <h1>Product Dashboard</h1>
+      <p>Manage your catalog — view, edit, and remove products.</p>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="goToCreate()">+ Add Product</button>
   </div>
 
-  <p *ngIf="loading">Loading products...</p>
-  <p class="error" *ngIf="error">{{ error }}</p>
+  <div class="card">
+    <p class="state loading" *ngIf="loading">
+      <span class="spinner"></span> Loading products...
+    </p>
+    <p class="state error" *ngIf="error">⚠ {{ error }}</p>
+    <p class="state empty" *ngIf="!loading && !error && products.length === 0">
+      No products yet. Click <strong>Add Product</strong> to create your first one.
+    </p>
 
-  <p *ngIf="!loading && !error && products.length === 0">No products found. Add one to get started.</p>
-
-  <table *ngIf="!loading && products.length > 0">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of products">
-        <td (click)="viewProduct(product)" class="clickable">{{ product.name }}</td>
-        <td (click)="viewProduct(product)" class="clickable">{{ product.price | number: '1.2-2' }}</td>
-        <td (click)="viewProduct(product)" class="clickable">{{ product.quantity }}</td>
-        <td>
-          <button type="button" (click)="onDeleteClick(product)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <table *ngIf="!loading && products.length > 0">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td (click)="viewProduct(product)" class="clickable name-cell">{{ product.name }}</td>
+          <td (click)="viewProduct(product)" class="clickable price-cell">{{ product.price | number: '1.2-2' }}</td>
+          <td (click)="viewProduct(product)" class="clickable">
+            <span class="badge"
+                  [class.badge-danger]="product.quantity < 20"
+                  [class.badge-warning]="product.quantity >= 20 && product.quantity < 100"
+                  [class.badge-success]="product.quantity >= 100">
+              {{ product.quantity }} in stock
+            </span>
+          </td>
+          <td class="actions-cell">
+            <button type="button" class="btn btn-danger btn-sm" (click)="onDeleteClick(product)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
