@@ -15,7 +15,7 @@ All planning/design docs live in [`docs/`](docs/):
 ## Project layout
 
 ```
-backend/    Spring Boot 3 API (Java 17, Spring Data JPA/Hibernate, Flyway, PostgreSQL)
+backend/    Spring Boot 3 API (Java 25, Spring Data JPA/Hibernate, Flyway, PostgreSQL)
 frontend/   Angular 17 SPA (Reactive Forms, Router, HttpClient)
 docs/       Architecture, specification, user stories, test strategy
 ```
