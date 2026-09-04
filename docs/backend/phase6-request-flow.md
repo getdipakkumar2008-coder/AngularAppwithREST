@@ -55,7 +55,7 @@ sequenceDiagram
 
     C->>DS: POST /api/products (JSON body)
     DS->>Ctrl: route request + CORS check
-    Ctrl->>Ctrl: Jackson JSON → ProductRequestDto
+    Ctrl->>Ctrl: Jackson JSON to ProductRequestDto
     Ctrl->>Ctrl: @Valid Bean Validation
     alt validation fails
         Ctrl-->>C: 400 Bad Request (fieldErrors)
