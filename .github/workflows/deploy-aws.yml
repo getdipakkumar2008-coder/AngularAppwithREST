@@ -11,8 +11,8 @@ permissions:
   contents: read
 
 env:
-  AWS_REGION: ${{ vars.AWS_REGION || secrets.AWS_REGION }}
-  ECS_CLUSTER: ${{ vars.ECS_CLUSTER }}
+  AWS_REGION: ${{ vars.AWS_REGION || vars.AWS_DEFAULT_REGION || secrets.AWS_REGION || secrets.AWS_DEFAULT_REGION }}
+  ECS_CLUSTER: ${{ vars.ECS_CLUSTER || secrets.ECS_CLUSTER }}
 
 jobs:
   deploy-backend:
@@ -22,10 +22,10 @@ jobs:
       run:
         working-directory: backend
     env:
-      ECR_REPOSITORY: ${{ vars.ECR_BACKEND_REPOSITORY }}
-      ECS_SERVICE: ${{ vars.ECS_BACKEND_SERVICE }}
-      TASK_DEFINITION: ${{ vars.ECS_BACKEND_TASK_DEFINITION }}
-      CONTAINER_NAME: ${{ vars.ECS_BACKEND_CONTAINER_NAME }}
+      ECR_REPOSITORY: ${{ vars.ECR_BACKEND_REPOSITORY || secrets.ECR_BACKEND_REPOSITORY }}
+      ECS_SERVICE: ${{ vars.ECS_BACKEND_SERVICE || secrets.ECS_BACKEND_SERVICE }}
+      TASK_DEFINITION: ${{ vars.ECS_BACKEND_TASK_DEFINITION || secrets.ECS_BACKEND_TASK_DEFINITION }}
+      CONTAINER_NAME: ${{ vars.ECS_BACKEND_CONTAINER_NAME || secrets.ECS_BACKEND_CONTAINER_NAME }}
 
     steps:
       - name: Check out repository
@@ -86,10 +86,10 @@ jobs:
       run:
         working-directory: frontend
     env:
-      ECR_REPOSITORY: ${{ vars.ECR_FRONTEND_REPOSITORY }}
-      ECS_SERVICE: ${{ vars.ECS_FRONTEND_SERVICE }}
-      TASK_DEFINITION: ${{ vars.ECS_FRONTEND_TASK_DEFINITION }}
-      CONTAINER_NAME: ${{ vars.ECS_FRONTEND_CONTAINER_NAME }}
+      ECR_REPOSITORY: ${{ vars.ECR_FRONTEND_REPOSITORY || secrets.ECR_FRONTEND_REPOSITORY }}
+      ECS_SERVICE: ${{ vars.ECS_FRONTEND_SERVICE || secrets.ECS_FRONTEND_SERVICE }}
+      TASK_DEFINITION: ${{ vars.ECS_FRONTEND_TASK_DEFINITION || secrets.ECS_FRONTEND_TASK_DEFINITION }}
+      CONTAINER_NAME: ${{ vars.ECS_FRONTEND_CONTAINER_NAME || secrets.ECS_FRONTEND_CONTAINER_NAME }}
 
     steps:
       - name: Check out repository

@@ -34,11 +34,11 @@ This repository includes GitHub Actions workflows for continuous integration and
 | --- | --- |
 | `AWS_ROLE_ARN` | ARN of the IAM role that GitHub Actions assumes through OIDC. |
 
-### Variables
+### Variables (recommended) or secrets (fallback)
 
 | Name | Purpose |
 | --- | --- |
-| `AWS_REGION` | AWS region for ECR and ECS (for example `ap-south-1`). Used as a fallback if the `AWS_REGION` variable is not defined. |
+| `AWS_REGION` (or `AWS_DEFAULT_REGION`) | AWS region for ECR and ECS (for example `ap-south-1`). |
 | `ECR_BACKEND_REPOSITORY` | Name of the backend Amazon ECR repository. |
 | `ECR_FRONTEND_REPOSITORY` | Name of the frontend Amazon ECR repository. |
 | `ECS_CLUSTER` | Amazon ECS cluster name hosting both services. |
@@ -49,7 +49,7 @@ This repository includes GitHub Actions workflows for continuous integration and
 | `ECS_BACKEND_CONTAINER_NAME` | Backend container name in the task definition template. Set this to `backend-app` unless you rename the template container. |
 | `ECS_FRONTEND_CONTAINER_NAME` | Frontend container name in the task definition template. Set this to `frontend-app` unless you rename the template container. |
 
-The deployment workflow resolves the AWS region from `vars.AWS_REGION` first and falls back to `secrets.AWS_REGION`, so either location is accepted.
+The deployment workflow resolves values from repository variables first and falls back to secrets with the same names. For region it checks `AWS_REGION`, then `AWS_DEFAULT_REGION`, in both `vars` and `secrets`.
 
 ## AWS prerequisites
 
