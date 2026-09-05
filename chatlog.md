@@ -11,7 +11,7 @@ A record of the conversation and work performed in this session, from project ki
 **Requirement.txt** was minimal: Angular frontend + Spring Boot/Java/Hibernate backend + PostgreSQL, a dashboard listing data with click-through to a detail page supporting edit/update/delete, backed by a RESTful API.
 
 **Actions:**
-- Read `Requirement.txt.txt`. Since no business entity was named, assumed a generic **Product** entity (id, name, description, price, quantity, createdDate, updatedDate) and documented this assumption explicitly.
+- Read `Requirement.txt`. Since no business entity was named, assumed a generic **Product** entity (id, name, description, price, quantity, createdDate, updatedDate) and documented this assumption explicitly.
 - Created `docs/UserStories.md` — 6 user stories (view dashboard, view detail, create, edit/update, delete, persistence) with acceptance criteria.
 - Created `docs/Architecture.md` — 3-tier design (Angular → Spring Boot → PostgreSQL), component breakdown, key architectural decisions (DTOs over entities, Flyway over `ddl-auto`, no NgRx).
 - Created `docs/Specification.md` — full REST API contract, DTOs, validation rules, error response shape.
