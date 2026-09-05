@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 env:
-  AWS_REGION: ${{ vars.AWS_REGION }}
+  AWS_REGION: ${{ vars.AWS_REGION || secrets.AWS_REGION }}
   ECS_CLUSTER: ${{ vars.ECS_CLUSTER }}
 
 jobs:
@@ -45,7 +45,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          aws-region: ${{ vars.AWS_REGION }}
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Log in to Amazon ECR
         id: login-ecr
@@ -115,7 +115,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          aws-region: ${{ vars.AWS_REGION }}
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Log in to Amazon ECR
         id: login-ecr

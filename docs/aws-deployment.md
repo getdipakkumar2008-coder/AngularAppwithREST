@@ -38,7 +38,7 @@ This repository includes GitHub Actions workflows for continuous integration and
 
 | Name | Purpose |
 | --- | --- |
-| `AWS_REGION` | AWS region for ECR and ECS (for example `ap-south-1`). |
+| `AWS_REGION` | AWS region for ECR and ECS (for example `ap-south-1`). Used as a fallback if the `AWS_REGION` variable is not defined. |
 | `ECR_BACKEND_REPOSITORY` | Name of the backend Amazon ECR repository. |
 | `ECR_FRONTEND_REPOSITORY` | Name of the frontend Amazon ECR repository. |
 | `ECS_CLUSTER` | Amazon ECS cluster name hosting both services. |
@@ -48,6 +48,8 @@ This repository includes GitHub Actions workflows for continuous integration and
 | `ECS_FRONTEND_TASK_DEFINITION` | Path to the frontend task definition template, typically `.aws/frontend-task-definition.json`. |
 | `ECS_BACKEND_CONTAINER_NAME` | Backend container name in the task definition template. Set this to `backend-app` unless you rename the template container. |
 | `ECS_FRONTEND_CONTAINER_NAME` | Frontend container name in the task definition template. Set this to `frontend-app` unless you rename the template container. |
+
+The deployment workflow resolves the AWS region from `vars.AWS_REGION` first and falls back to `secrets.AWS_REGION`, so either location is accepted.
 
 ## AWS prerequisites
 
