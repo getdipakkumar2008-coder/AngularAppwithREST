@@ -1,0 +1,9 @@
+Bening an senior architect  create a application 
+
+Technology stack 1 . Frontend : Angular
+Backend : Springboot ,JAVA
+
+
+Fronthend application should have dashboard with list of data .Once user click on specific data it should go to other page.user should be able to edit update and delete this data .
+Backend: based on Frontend  requirement springboot ,java ,Hibernate  will help to create this API.it will behave like a RESTFUL api. talking to UI layer request and response .
+Database: use postgressdb database to store dummay data and ADD, edit, update and delete operation
