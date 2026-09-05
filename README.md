@@ -11,6 +11,7 @@ All planning/design docs live in [`docs/`](docs/):
 - [`Specification.md`](docs/Specification.md) — REST API contract, DTOs, validation rules
 - [`Plan.md`](docs/Plan.md) — phased implementation plan
 - [`Testing.md`](docs/Testing.md) — test strategy and coverage index
+- [`aws-deployment.md`](docs/aws-deployment.md) — GitHub Actions CI/CD and AWS ECS deployment setup
 
 ## Project layout
 
