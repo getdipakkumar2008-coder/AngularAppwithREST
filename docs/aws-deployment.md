@@ -51,6 +51,8 @@ This repository includes GitHub Actions workflows for continuous integration and
 
 The deployment workflow resolves values from repository variables first and falls back to secrets with the same names. For region it checks `AWS_REGION`, then `AWS_DEFAULT_REGION`, in both `vars` and `secrets`.
 
+If required AWS deployment values are missing, the workflow now skips AWS login/push/ECS deployment steps instead of failing during credential setup.
+
 ## AWS prerequisites
 
 Before enabling the deployment workflow, create the following AWS resources:
