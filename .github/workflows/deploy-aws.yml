@@ -71,6 +71,16 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
+      - name: Ensure backend ECR repository exists
+        if: steps.deployment-config.outputs.enabled == 'true'
+        run: |
+          if aws ecr describe-repositories --repository-names "$ECR_REPOSITORY" >/dev/null 2>&1; then
+            echo "ECR repository '$ECR_REPOSITORY' already exists."
+          else
+            echo "Creating missing ECR repository '$ECR_REPOSITORY'."
+            aws ecr create-repository --repository-name "$ECR_REPOSITORY" >/dev/null
+          fi
+
       - name: Build, tag, and push backend image
         if: steps.deployment-config.outputs.enabled == 'true'
         id: build-image
